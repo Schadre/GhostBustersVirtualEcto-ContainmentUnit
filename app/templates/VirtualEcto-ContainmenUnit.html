@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Virtual Ecto-Containment Unit</title>
+</head>
+
+<body>
+    <main class="main">
+        <header class="header home">
+            <div class="container">
+                <div class="logo-wrapper">
+                    <img src="{{ url_for('static', filename='GB Logo.png') }}" style="max-width: 20%;"
+                        alt="Ghost busters logo">
+                    <h1>Virtual Ecto-Containment Unit</h1>
+                </div>
+                <div class="search-wrapper">
+                    <div class="search-wrap">
+                        <img src="{{ url_for('static', filename='search.svg') }}" alt="search icon"
+                            class="search-icon" />
+                        <input type="text" class="search-input body3-fonts" placeholder="Search" id="search-input" />
+                        <img src="{{ url_for('static', filename='cross.svg') }}" alt="cross icon"
+                            class="search-close-icon" id="search-close-icon" />
+                    </div>
+
+                    <div class="filter-wrap">
+                        <div>
+                            <input type="radio" id="number" name="filters" value="number" checked />
+                            <label for="number" class="body3-fonts">ID Number</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="name" name="filters" value="name" />
+                            <label for="name" class="body3-fonts">Ghost Name</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+        <section class="ghost-list">
+            <div class="container">
+                <div class="list-wrapper"></div>
+            </div>
+            <div id="not-found-message">Ghost not found</div>
+        </section>
+        <section class="footer">
+            <p>Created by Schadre Dent <br>
+                Ghostbusters Logo and Ghostbusters character names are trademarks of Sony Pictures.</p>
+        </section>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

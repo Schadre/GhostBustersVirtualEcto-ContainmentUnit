@@ -1,0 +1,2 @@
+FLASK_APP=ghostbusters.py
+FLASK_DEBUG=1
