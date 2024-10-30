@@ -32,7 +32,7 @@ def add_ghost():
         db.session.commit()
 
         flash("New ghost added successfully!", "success")
-        return redirect(url_for('VirtualEctoContainmentUnit.html'))
+        return redirect(url_for('VirtualEctoContainmentUnit'))
     return render_template('add_ghost.html')
 
 @api.route('/<int:id>', methods=['DELETE'])

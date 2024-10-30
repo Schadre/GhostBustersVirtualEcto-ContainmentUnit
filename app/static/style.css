@@ -111,12 +111,14 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  padding: 1%;
 }
 
 .logo-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
+  
 }
 
 .logo-wrapper > h1 {
@@ -149,96 +151,22 @@ body {
 
 .search-wrap {
   position: relative;
-
   border-radius: 16px;
   box-shadow: var(--drop-shadow-inner);
-  width: 60%;
+  width: 40%;
   height: 32px;
   gap: 8px;
 }
 
-.search-icon {
-  margin-left: 16px;
-}
+
 
 .search-wrap > input {
-  width: 80%;
+  width: 100%;
   border: none;
   background-color: #00000000;
-  color: rgb(0, 0, 0);
   font-size: large;
 }
 
-.search-close-icon {
-  position: absolute;
-  right: 1rem;
-  display: none;
-  cursor: pointer;
-}
-
-.search-close-icon-visible {
-  display: block;
-}
-
-.filter-wrapper {
-  position: absolute;
-  border: 4px solid var(--identity-primry);
-  border-top: 0;
-  border-radius: 12px;
-  padding: 0px 4px 4px 4px;
-  right: 0px;
-  box-shadow: var(--drop-shadow-hover);
-  min-width: 113px;
-  top: 40px;
-  display: none;
-  z-index: 5000;
-  
-}
-
-.filter-wrapper-open {
-  display: block;
-  
-}
-
-.filter-wrapper-overlay .main::before {
-  background-color: rgba(0, 0, 0, 0.4);
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 2;
-}
-
-.filter-wrapper > .body2-fonts {
-  color: var(--greyscale-white);
-  font-weight: var(--font-weight-bold);
-  padding: 16px 20px;
-}
-
-.filter-wrap {
-  box-shadow: var(--drop-shadow-inner);
-  padding: 16px 20px;
-  border-radius: 8px;
-  background-color: rgba(245, 245, 245, 0.588);
-}
-
-.filter-wrap > div {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.filter-wrap > div:last-child {
-  margin-bottom: 0px;
-}
-
-.filter-wrap input {
-  accent-color: var(--greyscale-black);
-}
 
 .ghost-list {
   box-shadow: var(--drop-shadow-inner);
@@ -329,4 +257,26 @@ div#not-found-message {
   display: flex;
   align-content: center;
   justify-content: center;
+}
+
+.custom-navbar {
+  background-color: black;
+}
+
+.navbar-nav {
+  top: 0%;
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  
+}
+
+.nav-link {
+  color: whitesmoke;
+}
+
+.navbar-nav li {
+  margin: 0 10px;
 }

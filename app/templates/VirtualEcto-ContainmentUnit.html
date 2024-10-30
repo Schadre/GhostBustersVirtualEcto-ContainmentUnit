@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,18 +26,10 @@
                 </div>
                 <form action="{{ url_for('api.search_ghosts') }}" method="GET" class="search-wrapper">
                     <div class="search-wrap">
-                        <input type="text" name="query" class="search-input body3-fonts"
-                            placeholder="Search by Name or ID" value="{{ query or '' }}" />
+                        <input type="text" style="text-align: center;" name="query" class="search-input body3-fonts"
+                            placeholder="API Search by Name" value="{{ query or '' }}" />
                     </div>
                     <button type="submit" class="btn btn-danger">Search</button>
-                    <div class="filter-wrap">
-                        <input type="radio" id="number" name="filter" value="number" {% if
-                            request.args.get('filter')=='number' %}checked{% endif %}>
-                        <label for="number" class="body3-fonts">ID Number</label>
-                        <input type="radio" id="name" name="filter" value="name" {% if
-                            request.args.get('filter')=='name' %}checked{% endif %}>
-                        <label for="name" class="body3-fonts">Name</label>
-                    </div>
             </div>
             </div>
 
@@ -73,3 +68,4 @@
 </body>
 
 </html>
+{% endblock %}
