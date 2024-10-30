@@ -152,6 +152,7 @@ body {
 
   border-radius: 16px;
   box-shadow: var(--drop-shadow-inner);
+  width: 60%;
   height: 32px;
   gap: 8px;
 }
@@ -164,6 +165,8 @@ body {
   width: 80%;
   border: none;
   background-color: #00000000;
+  color: rgb(0, 0, 0);
+  font-size: large;
 }
 
 .search-close-icon {

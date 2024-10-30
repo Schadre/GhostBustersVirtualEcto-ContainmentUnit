@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Virtual Ecto-Containment Unit - Add Ghost" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Virtual Ecto-Containment Unit - Add Ghost</title>
+</head>
+
+<body style="background-color: black;">
+    <section class="container" style="background-color: black;">
+    <div class="main-container">
+        <header class="header">
+            <div class="container">
+                <div class="logo-wrapper">
+                    <img src="{{ url_for('static', filename='GB Logo.png') }}" alt="Ghostbusters Logo"
+                        style="max-width: 15%;">
+                    <h1 class="site-title">Virtual Ecto-Containment Unit</h1>
+                </div>
+            </div>
+        </header>
+
+        <div class="form-container">
+            <h2 class="form-title">Add a New Ghost</h2>
+            <form action="{{ url_for('api.add_ghost') }}" method="POST">
+                <div class="form-group">
+                    <label for="name" style="color: whitesmoke;">Ghost Name:</label>
+                    <input type="text" id="name" name="ghost_name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="type" style="color: whitesmoke;">Type:</label>
+                    <input type="text" id="type" name="type" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="description" style="color: whitesmoke;" >Description:</label>
+                    <textarea id="description" name="description" rows="4" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="strength" style="color: whitesmoke;" >Strength Level:</label>
+                    <input type="number" id="strength" name="power_level" class="form-control" min="1" max="10" required>
+                </div>
+                <div class="form-group">
+                    <label for="picture_url" style="color: whitesmoke;">Picture URL:</label>
+                    <input type="url" id="picture_url" name="picture_url" class="form-control" required>
+                </div>
+
+                <button type="submit" class="btn btn-danger form-submit">Add Ghost</button>
+            </form>
+        </div>
+    </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

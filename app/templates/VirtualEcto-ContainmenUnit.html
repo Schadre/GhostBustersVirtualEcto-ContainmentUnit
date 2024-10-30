@@ -21,34 +21,49 @@
                         alt="Ghost busters logo">
                     <h1>Virtual Ecto-Containment Unit</h1>
                 </div>
-                <div class="search-wrapper">
+                <form action="{{ url_for('api.search_ghosts') }}" method="GET" class="search-wrapper">
                     <div class="search-wrap">
-                        <img src="{{ url_for('static', filename='search.svg') }}" alt="search icon"
-                            class="search-icon" />
-                        <input type="text" class="search-input body3-fonts" placeholder="Search" id="search-input" />
-                        <img src="{{ url_for('static', filename='cross.svg') }}" alt="cross icon"
-                            class="search-close-icon" id="search-close-icon" />
+                        <input type="text" name="query" class="search-input body3-fonts"
+                            placeholder="Search by Name or ID" value="{{ query or '' }}" />
                     </div>
-
+                    <button type="submit" class="btn btn-danger">Search</button>
                     <div class="filter-wrap">
-                        <div>
-                            <input type="radio" id="number" name="filters" value="number" checked />
-                            <label for="number" class="body3-fonts">ID Number</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="name" name="filters" value="name" />
-                            <label for="name" class="body3-fonts">Ghost Name</label>
-                        </div>
+                        <input type="radio" id="number" name="filter" value="number" {% if
+                            request.args.get('filter')=='number' %}checked{% endif %}>
+                        <label for="number" class="body3-fonts">ID Number</label>
+                        <input type="radio" id="name" name="filter" value="name" {% if
+                            request.args.get('filter')=='name' %}checked{% endif %}>
+                        <label for="name" class="body3-fonts">Name</label>
                     </div>
-                </div>
+            </div>
             </div>
 
         </header>
         <section class="ghost-list">
             <div class="container">
-                <div class="list-wrapper"></div>
+                <div class="list-wrapper">
+                    {% if ghosts %}
+                    {% for ghost in ghosts %}
+                    <div class="list-item">
+                        <div class="number-wrap">
+                            #{{ ghost.id }}
+                        </div>
+                        <div class="img-wrap">
+                            <img src="{{ ghost.picture_url }}" alt="{{ ghost.ghost_name }}">
+                        </div>
+                        <div class="name-wrap">
+                            <p class="caption-fonts">{{ ghost.ghost_name }}</p>
+                            <p class="body2-fonts">{{ ghost.description }}</p>
+                            <p class="body2-fonts">Power Level: {{ ghost.power_level }}</p>
+                            <p class="body2-fonts">Status: {{ ghost.status }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div id="not-found-message" class="text-center">Ghost not found</div>
+                    {% endif %}
+                </div>
             </div>
-            <div id="not-found-message">Ghost not found</div>
         </section>
         <section class="footer">
             <p>Created by Schadre Dent <br>
