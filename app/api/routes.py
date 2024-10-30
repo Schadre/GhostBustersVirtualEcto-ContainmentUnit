@@ -32,7 +32,7 @@ def add_ghost():
         db.session.commit()
 
         flash("New ghost added successfully!", "success")
-        return redirect(url_for('VirtualEcto-ContainmenUnit.html'))
+        return redirect(url_for('VirtualEctoContainmentUnit.html'))
     return render_template('add_ghost.html')
 
 @api.route('/<int:id>', methods=['DELETE'])
@@ -53,7 +53,7 @@ def update_ghost(id):
     ghost.power_level = data.get('power_level', ghost.power_level)
     ghost.status = data.get('status', ghost.status)
     ghost.special_abilities = data.get('special_abilities', ghost.special_abilities)
-    ghost.picture_url = data.get('pciture_url', ghost.picture_url)
+    ghost.picture_url = data.get('picture_url', ghost.picture_url)
     db.session.commit()
     return jsonify({"message":"Ghost updated successfully"}, 200)
 
@@ -85,7 +85,7 @@ def list_ghost():
     else:
         ghosts = Ghosts.query.all()
 
-    return render_template('VirtualEcto-ContainmenUnit.html', ghosts=ghosts, query=query, filter_by=filter_by)
+    return render_template('VirtualEcto-ContainmentUnit.html', ghosts=ghosts, query=query, filter_by=filter_by)
 
 @api.route('/public/search', methods=['GET'])
 def search_ghosts():

@@ -45,7 +45,7 @@
                     {% if ghosts %}
                     {% for ghost in ghosts %}
                     <div class="list-item">
-                        <div class="number-wrap">
+                        <div class="number-wrap" style="color: whitesmoke;">
                             #{{ ghost.id }}
                         </div>
                         <div class="img-wrap">
@@ -53,9 +53,6 @@
                         </div>
                         <div class="name-wrap">
                             <p class="caption-fonts">{{ ghost.ghost_name }}</p>
-                            <p class="body2-fonts">{{ ghost.description }}</p>
-                            <p class="body2-fonts">Power Level: {{ ghost.power_level }}</p>
-                            <p class="body2-fonts">Status: {{ ghost.status }}</p>
                         </div>
                     </div>
                     {% endfor %}

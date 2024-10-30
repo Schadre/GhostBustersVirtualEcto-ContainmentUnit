@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Virtual Ecto-Containment Unit - Add Ghost</title>
+    <title>Virtual Ecto-Containment Unit</title>
 </head>
 
 <body style="background-color: black;">
@@ -20,7 +20,7 @@
                 <div class="logo-wrapper">
                     <img src="{{ url_for('static', filename='GB Logo.png') }}" alt="Ghostbusters Logo"
                         style="max-width: 15%;">
-                    <h1 class="site-title">Virtual Ecto-Containment Unit</h1>
+                    <h1 class="site-title">Virtual Ecto-Containment Unit - Add Ghost</h1>
                 </div>
             </div>
         </header>
@@ -44,6 +44,14 @@
                     <label for="strength" style="color: whitesmoke;" >Strength Level:</label>
                     <input type="number" id="strength" name="power_level" class="form-control" min="1" max="10" required>
                 </div>
+                <div class="form-group">
+                    <label for="special_abilities" style="color: whitesmoke;">Special Abilities:</label>
+                    <input type="text" id="special_abilities" name="special_abilities" class="form-control" required>
+                </div>
+                    <div class="form-group">
+                        <label for="api_endpoint" style="color: whitesmoke;">API Endpoint:</label>
+                        <input type="text" id="api_endpoint" name="api_endpoint" class="form-control" required>
+                    </div>
                 <div class="form-group">
                     <label for="picture_url" style="color: whitesmoke;">Picture URL:</label>
                     <input type="url" id="picture_url" name="picture_url" class="form-control" required>

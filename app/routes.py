@@ -11,6 +11,7 @@ def admin_required(f):
         if not current_user.is_authenticated:
             print("User not authenticated")
             flash("Admin access required. Please log in.", "warning")
+            return redirect(url_for('adminlogin'))
 
         if getattr(current_user, 'role', None) != UserRole.ADMIN:
             flash('Admin access required')
@@ -21,14 +22,11 @@ def admin_required(f):
 
 
 @app.route('/')
-@app.route('/VirtualEcto-ContainmenUnit')
-def VirtualEctoContainmenUnit():
-    return render_template('/VirtualEcto-ContainmenUnit.html')
+@app.route('/VirtualEcto-ContainmentUnit')
+def VirtualEctoContainmentUnit():
+    ghosts = Ghosts.query.all() 
+    return render_template('/VirtualEcto-ContainmentUnit.html', ghosts=ghosts)
 
-@app.route('/ghost-list')
-def ghost_list():
-    ghosts = Ghosts.query.all()
-    return render_template('VirtualEcto-ContainmenUnit.html', ghosts=ghosts)
 
 @app.route('/adminlogin', methods=['GET', 'POST'])
 def adminlogin():
@@ -41,7 +39,7 @@ def adminlogin():
             return redirect(url_for('add_ghost'))
         else:
             flash("Invalid credentials or not an admin")
-    return render_template('login.html', form=form)
+    return render_template('adminlogin.html', form=form)
 
 @app.route('/add_ghost')
 @admin_required
