@@ -280,3 +280,32 @@ div#not-found-message {
 .navbar-nav li {
   margin: 0 10px;
 }
+
+
+@media (max-width: 1024px) {
+  .list-wrapper {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 1rem;
+  }
+
+  .list-item {
+    width: 50%;
+    max-width: 400px;
+    height: auto; 
+  }
+
+  .ghost-list {
+    width: 75%;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .list-item .name-wrap button {
+    padding: 0px;
+    font-size: 12px;
+    width: auto; 
+  }
+}
