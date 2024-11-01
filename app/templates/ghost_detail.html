@@ -24,37 +24,20 @@
                         alt="Ghost busters logo">
                     <h1>Virtual Ecto-Containment Unit</h1>
                 </div>
-                <form action="{{ url_for('api.list_ghost') }}" method="GET" class="search-wrapper">
-                    <div class="search-wrap">
-                        <input type="text" style="text-align: center;" name="query" class="search-input body3-fonts"
-                            placeholder="API Search by Name" value="{{ query or '' }}" />
-                    </div>
-                    <button type="submit" class="btn btn-danger">Search</button>
+            </div>
+            </div>
         </header>
-        <section class="ghost-list">
+        <section class="ghost-list" style="background-color: rgba(0, 0, 0, 0.550);">
             <div class="container">
-                <div class="list-wrapper">
-                    {% if ghosts %}
-                    {% for ghost in ghosts %}
-                    <div class="list-item">
-                        <div class="number-wrap" style="color: whitesmoke;">
-                            #{{ ghost.id }}
-                        </div>
-                        <div class="img-wrap">
-                            <img src="{{ ghost.picture_url }}" alt="{{ ghost.ghost_name }}">
-                        </div>
-                        <div class="name-wrap">
-                            <p class="caption-fonts">{{ ghost.ghost_name }}</p>
-                            <a href="{{ url_for('api.ghost_detail', ghost_id=ghost.id) }}">
-                                <button type="button" class="btn btn-danger">View Details</button>
-                            </a>
-
-                        </div>
-                    </div>
-                    {% endfor %}
-                    {% else %}
-                    <div id="not-found-message" class="text-center">Ghost not found</div>
-                    {% endif %}
+                <div class="detail-list" style="text-align: center;">
+                    <h1>{{ ghost.ghost_name }}</h1>
+                    <h2>Ghost ID: {{ ghost.id }}</h2>
+                    <p><img src="{{ ghost.picture_url }}" alt="{{ ghost.ghost_name }}" width="200" height="200"></p>
+                    <h2>Description: {{ ghost.description }}</h2>
+                    <h3>Power Level: {{ ghost.power_level }}</h3>
+                    <h3>Ghost Status: {{ ghost.status }}</h3>
+                    <h3>Ghost Abilities: {{ ghost.special_abilities }}</h3>
+                    <li><a class="nav-link" href="{{ url_for('api.get_ghost_by_id', id=ghost.id) }}">API Endpoint</a></li>
                 </div>
             </div>
         </section>

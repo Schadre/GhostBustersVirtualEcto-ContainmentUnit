@@ -171,7 +171,7 @@ body {
 .ghost-list {
   box-shadow: var(--drop-shadow-inner);
   border-radius: 0.75rem;
-  width: calc(100% - 10rem);
+  width: calc(80% - 5rem);
   height: 60vh;
   overflow-y: auto;
   background-color: rgba(245, 245, 245, 0.588);
@@ -189,12 +189,12 @@ body {
 .list-item {
   border-radius: 8px;
   box-shadow: var(--drop-shadow);
-
   width: 8.85rem;
   height: 8.85rem;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.850);
 }
 
 .list-item .number-wrap {
@@ -260,7 +260,7 @@ div#not-found-message {
 }
 
 .custom-navbar {
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.950);
 }
 
 .navbar-nav {

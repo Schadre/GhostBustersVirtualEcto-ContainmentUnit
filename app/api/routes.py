@@ -16,6 +16,7 @@ def add_ghost():
         status = request.form.get('status', 'not captured')
         special_abilities = request.form.get('special_abilities')
         picture_url = request.form.get('picture_url')
+        api_endpoint = request.form.get('api_endpoint')
 
         new_ghost = Ghosts(
             ghost_name=ghost_name,
@@ -23,9 +24,9 @@ def add_ghost():
             power_level=int(power_level),
             status=status,
             special_abilities=special_abilities,
-            picture_url=picture_url
+            picture_url=picture_url,
+            api_endpoint=api_endpoint
         )
-
         power_level = int(power_level)
 
         db.session.add(new_ghost)
@@ -57,22 +58,21 @@ def update_ghost(id):
     db.session.commit()
     return jsonify({"message":"Ghost updated successfully"}, 200)
 
-@api.route('/<int:id>', methods=['GET'])
-@admin_required
-def get_ghost(id):
-    ghost = Ghosts.query.get_or_404(id)
-    return jsonify({
-        "id": ghost.id,
-        "ghost_name": ghost.ghost_name,
-        "description": ghost.description,
-        "power_level": ghost.power_level,
-        "status": ghost.status,
-        "special_abilities": ghost.special_abilities,
-        "picture_url": ghost.picture_url,
-        "api_endpoint": ghost.api_endpoint
-    }), 200
 
 #Public routes
+@api.route('/public/<identifier>', methods=(['GET']))
+def get_ghost(identifier):
+    if identifier.isdigit():
+        ghost = Ghosts.query.get_or_404(int(identifier))
+    else: 
+        ghost = Ghosts.query.filter_by(ghost_name=identifier).first_or_404()
+    return render_template('ghost_detail.html', ghost=ghost)
+
+@api.route('/public/ghost/<int:ghost_id>', methods=['GET'])
+def ghost_detail(ghost_id):
+    ghost = Ghosts.query.get_or_404(ghost_id)
+    return render_template('ghost_detail.html', ghost=ghost)
+
 @api.route('/public', methods=['GET'])
 def list_ghost():
     query = request.args.get('query', '').lower()
@@ -105,7 +105,7 @@ def search_ghosts():
         for ghost in ghosts
     ]), 200
 
-@api.route('/<int:id>/capture', methods=['POST'])
+@api.route('/public/<int:id>/capture', methods=['POST'])
 @login_required
 def capture_ghost(id):
     ghost = Ghosts.query.get_or_404(id)
@@ -115,3 +115,34 @@ def capture_ghost(id):
     ghost.captured_by = current_user.id 
     db.session.commit()
     return jsonify({"message": f"{ghost.ghost_name} has been captured!"}), 200
+
+@api.route('/public/<int:id>', methods=['GET'])
+def get_ghost_by_id(id):
+    ghost = Ghosts.query.get_or_404(id)
+    return jsonify({
+        "id": ghost.id,
+        "ghost_name": ghost.ghost_name,
+        "description": ghost.description,
+        "power_level": ghost.power_level,
+        "status": ghost.status,
+        "special_abilities": ghost.special_abilities,
+        "picture_url": ghost.picture_url,
+        "api_endpoint": ghost.api_endpoint
+    }), 200
+
+@api.route('/public/all', methods=['GET'])
+def get_all_ghosts():
+    ghosts = Ghosts.query.all()
+    return jsonify([
+        {
+            "id": ghost.id,
+            "ghost_name": ghost.ghost_name,
+            "description": ghost.description,
+            "power_level": ghost.power_level,
+            "status": ghost.status,
+            "special_abilities": ghost.special_abilities,
+            "picture_url": ghost.picture_url,
+            "api_endpoint": ghost.api_endpoint
+        }
+        for ghost in ghosts
+    ]), 200

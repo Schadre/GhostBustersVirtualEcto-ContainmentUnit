@@ -20,13 +20,16 @@ def admin_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-
 @app.route('/')
 @app.route('/VirtualEcto-ContainmentUnit')
 def VirtualEctoContainmentUnit():
     ghosts = Ghosts.query.all() 
     return render_template('/VirtualEcto-ContainmentUnit.html', ghosts=ghosts)
 
+@app.route('/ghost_detail')
+def ghost_detail():
+    ghost = Ghosts.query.all()
+    return render_template('/ghost_detail.html', ghost=ghost)
 
 @app.route('/adminlogin', methods=['GET', 'POST'])
 def adminlogin():
