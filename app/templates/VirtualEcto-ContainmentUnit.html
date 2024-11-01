@@ -24,9 +24,9 @@
                         alt="Ghost busters logo">
                     <h1>Virtual Ecto-Containment Unit</h1>
                 </div>
-                <form action="{{ url_for('api.get_ghost_by_name') }}" method="GET" class="search-wrapper">
+                <form action="{{ url_for('api.get_ghost_by_api') }}" method="GET" class="search-wrapper">
                     <div class="search-wrap">
-                        <input type="text" style="text-align: center;" name="ghost_name" class="search-input body3-fonts"
+                        <input type="text" name="api_endpoint" style="text-align: center;" class="search-input body3-fonts"
                             placeholder="API Search by Name" />
                     </div>
                     <button type="submit" class="btn btn-danger">Search</button>

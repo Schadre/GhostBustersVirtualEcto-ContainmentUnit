@@ -68,21 +68,22 @@ def get_ghost(identifier):
         ghost = Ghosts.query.filter_by(ghost_name=identifier).first_or_404()
     return render_template('ghost_detail.html', ghost=ghost)
 
-@api.route('/public', methods=['GET'])
-def get_ghost_by_name():
-    ghost_name = request.args.get('ghost_name')
-    if ghost_name:
-        print(f"Searching for ghost: {ghost_name}")
-        ghost = Ghosts.query.filter(Ghosts.ghost_name.ilike(ghost_name)).first_or_404()
-        return jsonify({
-            "id": ghost.id,
-            "ghost_name": ghost.ghost_name,
-            "description": ghost.description,
-            "power_level": ghost.power_level,
-            "status": ghost.status,
-            "special_abilities": ghost.special_abilities,
-            "picture_url": ghost.picture_url,
-            "api_endpoint": ghost.api_endpoint
+@api.route('/public/by_endpoint', methods=['GET'])
+def get_ghost_by_api():
+    api_endpoint = request.args.get('api_endpoint')
+    if not api_endpoint:
+        return jsonify({"error": "api_endpoint parameter is required"}), 400
+    
+    ghost = Ghosts.query.filter_by(api_endpoint=api_endpoint).first_or_404()
+    return jsonify({
+        "id": ghost.id,
+        "ghost_name": ghost.ghost_name,
+        "description": ghost.description,
+        "power_level": ghost.power_level,
+        "status": ghost.status,
+        "special_abilities": ghost.special_abilities,
+        "picture_url": ghost.picture_url,
+        "api_endpoint": ghost.api_endpoint
         }), 200
 
 @api.route('/public/ghost/<int:ghost_id>', methods=['GET'])
