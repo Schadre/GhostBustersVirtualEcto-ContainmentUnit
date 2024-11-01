@@ -42,7 +42,7 @@ def delete_ghost(id):
     ghost = Ghosts.query.get_or_404(id)
     db.session.delete(ghost)
     db.session.commit()
-    return jsonify({"message":"Ghost deleted successfully"}, 200)
+    return jsonify({"message":"Ghost deleted successfully"}), 200
 
 @api.route('/<int:id>', methods=['PUT'])
 @admin_required
@@ -56,7 +56,7 @@ def update_ghost(id):
     ghost.special_abilities = data.get('special_abilities', ghost.special_abilities)
     ghost.picture_url = data.get('picture_url', ghost.picture_url)
     db.session.commit()
-    return jsonify({"message":"Ghost updated successfully"}, 200)
+    return jsonify({"message":"Ghost updated successfully"}), 200
 
 
 #Public routes
@@ -68,42 +68,27 @@ def get_ghost(identifier):
         ghost = Ghosts.query.filter_by(ghost_name=identifier).first_or_404()
     return render_template('ghost_detail.html', ghost=ghost)
 
+@api.route('/public', methods=['GET'])
+def get_ghost_by_name():
+    ghost_name = request.args.get('ghost_name')
+    if ghost_name:
+        print(f"Searching for ghost: {ghost_name}")
+        ghost = Ghosts.query.filter(Ghosts.ghost_name.ilike(ghost_name)).first_or_404()
+        return jsonify({
+            "id": ghost.id,
+            "ghost_name": ghost.ghost_name,
+            "description": ghost.description,
+            "power_level": ghost.power_level,
+            "status": ghost.status,
+            "special_abilities": ghost.special_abilities,
+            "picture_url": ghost.picture_url,
+            "api_endpoint": ghost.api_endpoint
+        }), 200
+
 @api.route('/public/ghost/<int:ghost_id>', methods=['GET'])
 def ghost_detail(ghost_id):
     ghost = Ghosts.query.get_or_404(ghost_id)
     return render_template('ghost_detail.html', ghost=ghost)
-
-@api.route('/public', methods=['GET'])
-def list_ghost():
-    query = request.args.get('query', '').lower()
-    filter_by = request.args.get('filter', 'name')
-
-    if filter_by == 'name':
-        ghosts = Ghosts.query.filter(Ghosts.ghost_name.ilike(f"%{query}%")).all()
-    elif filter_by == 'number' and query.isdigit():
-        ghosts = Ghosts.query.filter(Ghosts.id == int(query)).all()
-    else:
-        ghosts = Ghosts.query.all()
-
-    return render_template('VirtualEcto-ContainmentUnit.html', ghosts=ghosts, query=query, filter_by=filter_by)
-
-@api.route('/public/search', methods=['GET'])
-def search_ghosts():
-    query = request.args.get('query', '').lower()
-    ghosts = Ghosts.query.filter(Ghosts.ghost_name.ilike(f"%{query}%")).all()
-    return jsonify([
-        {
-        "id": ghost.id,
-        "ghost_name": ghost.ghost_name,
-        "description": ghost.description,
-        "power_level": ghost.power_level,
-        "status": ghost.status,
-        "special_abilities": ghost.special_abilities,
-        "picture_url": ghost.picture_url,
-        "api_endpoint": ghost.api_endpoint
-        }
-        for ghost in ghosts
-    ]), 200
 
 @api.route('/public/<int:id>/capture', methods=['POST'])
 @login_required
