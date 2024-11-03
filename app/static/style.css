@@ -34,6 +34,7 @@ h1 {
   font-size: var(--headline-font-size);
   line-height: var(--headline-line-height);
   color: whitesmoke;
+  text-align: center;
 }
 
 h2 {
