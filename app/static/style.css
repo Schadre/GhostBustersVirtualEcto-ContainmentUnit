@@ -196,6 +196,7 @@ body {
   text-decoration: none;
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.850);
+  margin: 10px;
 }
 
 .list-item .number-wrap {
