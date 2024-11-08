@@ -70,7 +70,7 @@ def get_ghost(identifier):
 
 @api.route('/public/by_endpoint', methods=['GET'])
 def get_ghost_by_api():
-    api_endpoint = request.args.get('api_endpoint')
+    api_endpoint = request.args.get('api_endpoint', '').lower()
     if not api_endpoint:
         return jsonify({"error": "api_endpoint parameter is required"}), 400
     
